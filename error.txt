@@ -1,0 +1,5 @@
+---2024-5-13---使用文本测试生成树时发现
+Exception in thread "main" java.lang.NullPointerException
+        at org.example.node.addWeight(node.java:19)
+        at org.example.fileModule.toformTree(fileModule.java:50)
+        at org.example.Main.main(Main.java:30)
