@@ -19,7 +19,7 @@ public class node {
     }
     boolean isChildExist(node child){
         for (edge Edge : this.childlist){
-            if (Edge.childNode.name ==child.name){
+            if (Edge.childNode.name.equals(child.name)){
                 return true;
             }
         }
@@ -27,7 +27,7 @@ public class node {
     }
     edge findChildByName(String child){
         for (edge Edge : this.childlist){
-            if (Edge.childNode.name ==child){
+            if (Edge.childNode.name.equals(child)){
                 return Edge;
             }
         }
