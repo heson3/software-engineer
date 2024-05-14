@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 public class fileModule {
-    String filePath = "path/to/your/file.txt";
+    String filePath = "E:\\javaProject\\lab1_1\\src\\main\\java\\org\\example\\test.txt";
     nodeList fileNodes = new nodeList();
 
     //创建树
@@ -97,3 +97,5 @@ public class fileModule {
 
 
 }
+
+

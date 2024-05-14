@@ -4,6 +4,7 @@ package org.example;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+        /*
         nodeList NodeList = new nodeList();
         node Node1 = new node();
         NodeList.add_node(Node1);
@@ -16,7 +17,6 @@ public class Main {
         node Node2 = new node();
         Node2.name = "2";
         NodeList.add_node(Node2);
-
         edge Edge1 = new edge();
         Edge1.fatherNode = Node1;
         Edge1.childNode = Node2;
@@ -25,6 +25,11 @@ public class Main {
         Node1.addChild(Edge1);
 
         for (node Node : NodeList.returnAllChild()){
+        */
+        fileModule FileModule = new fileModule();
+        FileModule.loadFile_formTree();
+        nodeList tree = FileModule.fileNodes;
+        for (node Node : tree.returnAllNode()){
             System.out.println(Node.name + ":");
             for (edge Edgek : Node.childlist){
                 System.out.println(Edgek.childNode.name + Edgek.weight);
