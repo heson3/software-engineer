@@ -8,16 +8,13 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class fileModule {
-<<<<<<< HEAD
     //请写入本地存放文本的绝对路径
-    String filePath = "F:\\Campus\\engineer\\softwareEngineering\\lab1\\software-engineer\\src\\main\\java\\org\\example\\test.txt";
-=======
+    //String filePath = "F:\\Campus\\engineer\\softwareEngineering\\lab1\\software-engineer\\src\\main\\java\\org\\example\\test.txt";
     String filePath = "E:\\javaProject\\lab1_1\\src\\main\\java\\org\\example\\test.txt";
->>>>>>> 5363a1a3c8f92ff98478e0a1b852d3a231a8db33
     nodeList fileNodes = new nodeList();
 
-    //void loadFile_formTree(){
-    public void toformTree(){
+    void loadFile_formTree(){
+    //public void toformTree(){
         {
             try {
                 // 获取文件路径
