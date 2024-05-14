@@ -10,10 +10,11 @@ import java.util.regex.Pattern;
 public class fileModule {
     //请写入本地存放文本的绝对路径
     String filePath = "F:\\Campus\\engineer\\softwareEngineering\\lab1\\software-engineer\\src\\main\\java\\org\\example\\test.txt";
+   // String filePath = "E:\\javaProject\\lab1_1\\src\\main\\java\\org\\example\\test.txt";
     nodeList fileNodes = new nodeList();
 
-    //void loadFile_formTree(){
-    public void toformTree(){
+    void loadFile_formTree(){
+    //public void toformTree(){
         {
             try {
                 // 获取文件路径
@@ -103,3 +104,5 @@ public class fileModule {
 
 
 }
+
+

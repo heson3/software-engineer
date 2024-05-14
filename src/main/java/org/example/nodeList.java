@@ -29,8 +29,11 @@ public class nodeList {
         }
         return null;
     }
-    List<node> returnAllChild(){
+    List<node> returnAllNode(){
         return this.nodes;
+    }
+    List<edge> returnAllEdge(){
+        return this.edges;
     }
 
 }
