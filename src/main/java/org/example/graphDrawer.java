@@ -25,16 +25,13 @@ public class graphDrawer {
     }
 
     public void drawDirectedGraph(nodeList fileNodes, String fileName) {
-       try{
-            String dotSource = generateDirectedGraph(fileNodes);
+       
+        String dotSource = generateDirectedGraph(fileNodes);
 
-            Graphviz graphviz = Graphviz.fromString(dotSource);
-            graphviz.render(Format.PNG).toFile(new File(fileName));
-       }
-       catch( IOException e){
-            System.out.println("graphDrawer error: "+e);
-       }
-    }
+        Graphviz graphviz = Graphviz.fromString(dotSource);
+        graphviz.render(Format.PNG).toFile(new File(fileName));
+
+    
 
 }
 
