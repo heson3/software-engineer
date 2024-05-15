@@ -1,8 +1,13 @@
 package org.example;
 
+import java.io.IOException;
+import java.net.FileNameMap;
+
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitespace characters in your code.
 public class Main {
-    public static void main(String[] args) {
-        /*
+    public static void main(String[] args) throws IOException {
+        /* 测试阶段一：构建树
         nodeList NodeList = new nodeList();
         node Node1 = new node();
         NodeList.add_node(Node1);
@@ -24,6 +29,7 @@ public class Main {
 
         for (node Node : NodeList.returnAllChild()){
         */
+        /*测试阶段二：读文件构建树
         fileModule FileModule = new fileModule();
         FileModule.loadFile_formTree();
         nodeList tree = FileModule.fileNodes;
@@ -33,5 +39,14 @@ public class Main {
                 System.out.println(Edgek.childNode.name + Edgek.weight);
             }
         }
+        */
+        fileModule test3 = new fileModule();
+        test3.loadFile_formTree();
+        nodeList tree = test3.fileNodes;
+        graphDrawer GraphDrawer = new graphDrawer();
+        String fileName = "E:\\javaProject\\lab1_1\\test3.png";
+        GraphDrawer.drawDirectedGraph(tree,fileName);
+
+
     }
 }

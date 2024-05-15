@@ -29,6 +29,7 @@ public class graphDrawer {
 
         Graphviz graphviz = Graphviz.fromString(dotSource);
         graphviz.render(Format.PNG).toFile(new File(fileName));
+
     }
 
 }
