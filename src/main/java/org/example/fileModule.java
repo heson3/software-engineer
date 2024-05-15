@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class fileModule {
     //请写入本地存放文本的绝对路径
-    String filePath = "F:\\Campus\\engineer\\softwareEngineering\\lab1\\software-engineer\\src\\main\\java\\org\\example\\test.txt";
+    String filePath = "F:\\Campus\\engineer\\softwareEngineering\\lab1\\mySW\\src\\main\\java\\org\\example\\test.txt";
    // String filePath = "E:\\javaProject\\lab1_1\\src\\main\\java\\org\\example\\test.txt";
     nodeList fileNodes = new nodeList();
 
@@ -44,22 +44,24 @@ public class fileModule {
                                 fileNodes.add_node(buffer);
                             }
                             else{
+                                //已出现过的单词
                                 if(fileNodes.is_node_exist(word)){
                                     boolean is_child_exist = buffer.isChildExist(fileNodes.findNodeByName(word));
-                                    //父节点已有该子节点的边，边权重加1
+                                    //word是buffer的子节点，边权重加1
                                     if(is_child_exist){
                                         System.out.println(word+"已存在，与"+buffer.name+"的边权值+1");
                                         buffer.addWeight(buffer.findChildByName(word));
                                     }
                                     else{
-                                        //父节点没有指向该子节点的边，则新建边，将边加到边集合edges,将边加到父节点的child里
+                                        //父节点没有指向该子节点的边，
                                         System.out.println(word+"与"+buffer.name+"建立新边");
+                                        //新建边,将边加到边集合edges,
                                         edge newEdge = new edge();
                                         newEdge.fatherNode =buffer;
                                         newEdge.weight =1;
                                         newEdge.childNode = fileNodes.findNodeByName(word);
                                         fileNodes.add_edge(newEdge);
-
+                                        //将边加到父节点里
                                         buffer.addChild(newEdge);
                                     }
                                     //buffer.addChild(fileNodes.findNodeByName(word));
@@ -68,6 +70,7 @@ public class fileModule {
                                     System.out.println("更新buffer为:"+buffer.name);
                                 }
                                 else{
+                                    //第一次出现的单词，直接成为buffer的子节点
                                     System.out.println(word+"第一次出现");
                                     node NewNode = new node();
                                     NewNode.name = word;

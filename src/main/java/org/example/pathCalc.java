@@ -56,7 +56,8 @@ public class pathCalc {
 
             //生成输出字符串
         for (node Node : shortestPath){
-            if(output.isEmpty()){
+            //if(output.isEmpty()){
+            if(output.length() == 0){
                 output.append(Node.name);
             }
             else{

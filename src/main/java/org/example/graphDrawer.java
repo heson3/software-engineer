@@ -24,11 +24,16 @@ public class graphDrawer {
         return dot.toString();
     }
 
-    public void drawDirectedGraph(nodeList fileNodes, String fileName) throws IOException {
-        String dotSource = generateDirectedGraph(fileNodes);
+    public void drawDirectedGraph(nodeList fileNodes, String fileName) {
+       try{
+            String dotSource = generateDirectedGraph(fileNodes);
 
-        Graphviz graphviz = Graphviz.fromString(dotSource);
-        graphviz.render(Format.PNG).toFile(new File(fileName));
+            Graphviz graphviz = Graphviz.fromString(dotSource);
+            graphviz.render(Format.PNG).toFile(new File(fileName));
+       }
+       catch( IOException e){
+            System.out.println("graphDrawer error: "+e);
+       }
     }
 
 }
