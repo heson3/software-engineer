@@ -47,19 +47,19 @@ public class fileModule {
                     if (!word.isEmpty()) {
                         if (buffer.name == null) {
                             buffer.name = word;
-                                System.out.println("First word: "+buffer.name);
-                                fileNodes.add_node(buffer);
-                            }
-                            else{
-                                if(fileNodes.is_node_exist(word)){
-                                    boolean is_child_exist = buffer.isChildExist(fileNodes.findNodeByName(word));
-                                    //父节点已有该子节点的边，边权重加1
-                                    if(is_child_exist){
-                                        System.out.println(word+"已存在，与"+buffer.name+"的边权值+1");
+                            System.out.println("First word: "+buffer.name);
+                            fileNodes.add_node(buffer);
+                        }
+                        else{
+                            if(fileNodes.is_node_exist(word)){
+                                boolean is_child_exist = buffer.isChildExist(fileNodes.findNodeByName(word));
+                                //父节点已有该子节点的边，边权重加1
+                                if(is_child_exist){
+                                    System.out.println(word+"已存在，与"+buffer.name+"的边权值+1");
                                     buffer.addWeight(buffer.findChildByName(word));
-                                } else {
+                                }else {
                                     //父节点没有指向该子节点的边，则新建边，将边加到边集合edges,将边加到父节点的child里
-                                        System.out.println(word+"与"+buffer.name+"建立新边");
+                                    System.out.println(word+"与"+buffer.name+"建立新边");
                                     edge newEdge = new edge();
                                     newEdge.fatherNode = buffer;
                                     newEdge.weight = 1;
@@ -68,27 +68,10 @@ public class fileModule {
 
                                     buffer.addChild(newEdge);
                                 }
-                                //buffer.addChild(fileNodes.findNodeByName(word));
-                                //更新buffer
-                                buffer = fileNodes.findNodeByName(word);
-                            } else {
-                                node NewNode = new node();
-                                NewNode.name = word;
-                                NewNode.father = buffer;
-                                        //新建边,将边加到边集合edges,
-                                        edge newEdge = new edge();
-                                        newEdge.fatherNode =buffer;
-                                        newEdge.weight =1;
-                                        newEdge.childNode = fileNodes.findNodeByName(word);
-                                        fileNodes.add_edge(newEdge);
-                                        //将边加到父节点里
-                                        buffer.addChild(newEdge);
-                                    }
                                     //buffer.addChild(fileNodes.findNodeByName(word));
-                                    
-                                    buffer =fileNodes.findNodeByName(word);
-                                    System.out.println("更新buffer为:"+buffer.name);
-                                }
+                                    //更新buffer
+                                    buffer = fileNodes.findNodeByName(word);
+                            }
                                 else{
                                     //第一次出现的单词，直接成为buffer的子节点
                                     System.out.println(word+"第一次出现");

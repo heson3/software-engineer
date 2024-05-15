@@ -24,14 +24,14 @@ public class graphDrawer {
         return dot.toString();
     }
 
-    public void drawDirectedGraph(nodeList fileNodes, String fileName) {
-       
+    public void drawDirectedGraph(nodeList fileNodes, String fileName) throws IOException {
+
         String dotSource = generateDirectedGraph(fileNodes);
 
         Graphviz graphviz = Graphviz.fromString(dotSource);
         graphviz.render(Format.PNG).toFile(new File(fileName));
 
-    
+    }
 
 }
 
