@@ -28,47 +28,62 @@ public class graphDrawer {
 
         return dot.toString();
     }
-    public String generateHighLightGraph(nodeList fileNodes, List<node> highlightPath){
+    public String generateHighLightGraph(nodeList fileNodes, List<edge> edgePath) {
         StringBuilder dot = new StringBuilder();
         dot.append("digraph G {\n");
 
         for (node Node : fileNodes.returnAllNode()) {
-            if (highlightPath.contains(Node.name)) {
-                dot.append("\t").append(Node.name).append(" [color=red, fontcolor=red];\n");
-            } else {
-                dot.append("\t").append(Node.name).append(";\n");
-            }
+            dot.append("\t").append(Node.name).append(";\n");
 
             for (edge Edge : Node.childlist) {
-                if (highlightPath.contains(Node.name) && highlightPath.contains(Edge.childNode.name)) {
-                    dot.append("\t").append(Node.name).append(" -> ").append(Edge.childNode.name)
-                            .append(" [label=\"").append(Edge.weight).append("\", color=red, fontcolor=red];\n");
-                } else {
-                    dot.append("\t").append(Node.name).append(" -> ").append(Edge.childNode.name)
-                            .append(" [label=\"").append(Edge.weight).append("\"];\n");
+                String edgeColor = ""; // Color for the edge
+                if (edgePath.contains(Edge)) {
+                    edgeColor = "[color=red, fontcolor=red]";
                 }
+                dot.append("\t").append(Node.name).append(" -> ").append(Edge.childNode.name)
+                        .append(" [label=\"").append(Edge.weight).append("\"]")
+                        .append(edgeColor).append(";\n");
             }
         }
+
+        for (edge Edge : edgePath) {
+            dot.append("\t").append(Edge.fatherNode.name).append(" [color=red, fontcolor=red];\n");
+            dot.append("\t").append(Edge.childNode.name).append(" [color=red, fontcolor=red];\n");
+            dot.append("\t").append(Edge.fatherNode.name).append(" -> ").append(Edge.childNode.name)
+                    .append(" [label=\"").append(Edge.weight).append("\", color=red, fontcolor=red];\n");
+        }
+
         dot.append("}\n");
         return dot.toString();
     }
+
     public void drawDirectedGraph(nodeList fileNodes, String fileName) throws IOException {
 
         String dotSource = generateDirectedGraph(fileNodes);
 
         Graphviz graphviz = Graphviz.fromString(dotSource);
-        graphviz.render(Format.PNG).toFile(new File(fileName));
+        File outputFile = new File(fileName);
+        graphviz.render(Format.PNG).toFile(outputFile);
+        displayImage(outputFile);
 
     }
-    public void drawHighlightGraph(nodeList fileNodes,List<node> highlightPath, String fileName) throws IOException {
+    public void drawHighlightGraph(nodeList fileNodes,List<edge> highlightPath, String fileName) throws IOException {
 
         String dotSource = generateHighLightGraph(fileNodes,highlightPath);
 
         Graphviz graphviz = Graphviz.fromString(dotSource);
-        graphviz.render(Format.PNG).toFile(new File(fileName));
+        File outputFile = new File(fileName);
+        graphviz.render(Format.PNG).toFile(outputFile);
+        displayImage(outputFile);
+
 
     }
     public void displayImage(File file) throws IOException {
+        if (GraphicsEnvironment.isHeadless()) {
+            System.err.println("No graphical environment available.");
+            return;
+        }
+
         BufferedImage image = ImageIO.read(file);
         ImageIcon icon = new ImageIcon(image);
         JFrame frame = new JFrame();
@@ -78,7 +93,7 @@ public class graphDrawer {
         lbl.setIcon(icon);
         frame.add(lbl);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }
 

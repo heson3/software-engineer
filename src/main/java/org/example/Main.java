@@ -1,11 +1,8 @@
 package org.example;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 import java.io.File;
-import java.util.Random;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -42,13 +39,14 @@ public class Main {
             throw new RuntimeException(e);
         }
         System.out.println("initialize already done...you can enter command now.");
-        System.out.println("3.查询桥接词");
-        System.out.println("4.根据输入文本查询桥接词生成新文本");
-        System.out.println("5.计算最短路径");
-        System.out.println("6.随机游走");
-        System.out.println("Enter 'exit' to end.");
 
         while (true) {
+
+            System.out.println(">3.查询桥接词");
+            System.out.println(">4.根据输入文本查询桥接词生成新文本");
+            System.out.println(">5.计算最短路径");
+            System.out.println(">6.随机游走");
+            System.out.println(">Enter 'exit' to end.");
             System.out.print("> ");
             String command = scanner.nextLine();
             String result = "";
@@ -72,11 +70,11 @@ public class Main {
             }
             //5-计算最短路径
             if(command.equals("5")){
-                System.out.print("input two words: ");
+                System.out.print("input one word or two words: ");
                 String words = scanner.nextLine();
                 result = processCommand(tree,words,5);
-                File f = new File("path.png");
-                Drawer.displayImage(f);
+                //File f = new File("path.png");
+                //Drawer.displayImage(f);
             }
             //6-随机游走
             if(command.equals("6")){
@@ -100,6 +98,7 @@ public class Main {
             return query.output;
         }
         if(comd==4){
+            /*
             //queryBridgeWords query = new queryBridgeWords(nodelist);
             ArrayList<String> wordlist = new ArrayList<>(Arrays.asList(word));
 
@@ -124,13 +123,43 @@ public class Main {
                 // 如果不是最后一个元素，添加空格
                 strbd.append(s).append(" ");
             }
-            return strbd.toString();
+            return strbd.toString();*/
+            generateNewText func = new generateNewText();
+            String  output = func.generateNewText(words, nodelist);
+            System.out.println(output);
+
         }
         if(comd ==5){
+
+            String[] word_5 = words.split(" ");
             pathCalc pathcalc = new pathCalc();
-            return pathcalc.calcShortestPath(word[0],word[1],nodelist);
+            graphDrawer lightedGraph = new graphDrawer();
+            if (word_5.length == 2){
+                pathCalc.PathResult pathResult = pathcalc.calcShortestPath(word_5[0], word_5[1],nodelist);
+                lightedGraph.drawHighlightGraph(nodelist, pathResult.pathEdge,"h_graph.png");
+                System.out.println("The shortest distance between " + word_5[0] + " and " + word_5[1] + " is "+ pathResult.length);
+
+            } else if (word_5.length == 1) {
+                Map<node, pathCalc.PathResult> resultMap= pathcalc.calcShortestPathsFromNode(word_5[0], nodelist);
+                // 打印最短路径信息
+                for (Map.Entry<node, pathCalc.PathResult> entry : resultMap.entrySet()) {
+                    node targetNode = entry.getKey();
+                    pathCalc.PathResult result = entry.getValue();
+
+                    System.out.print("Shortest path to " + targetNode.name + ": ");
+                    for (node pathNode : result.path) {
+                        System.out.print(pathNode.name + " ");
+                    }
+
+                    System.out.println("[with distance] " + result.length);
+                }
+
+            }else {
+                System.out.println("Enter one word or two");
+            }
+
         }
-        return  "not 3 4";
+        return  "";
     }
 
 }
