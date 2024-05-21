@@ -28,33 +28,50 @@ public class graphDrawer {
 
         return dot.toString();
     }
-    public String generateHighLightGraph(nodeList fileNodes, List<edge> edgePath) {
+    public String generateHighLightGraph(nodeList fileNodes,List<node> path, List<edge> edgePath) {
         StringBuilder dot = new StringBuilder();
         dot.append("digraph G {\n");
 
-        for (node Node : fileNodes.returnAllNode()) {
-            dot.append("\t").append(Node.name).append(";\n");
-
-            for (edge Edge : Node.childlist) {
-                String edgeColor = ""; // Color for the edge
-                if (edgePath.contains(Edge)) {
-                    edgeColor = "[color=red, fontcolor=red]";
-                }
-                dot.append("\t").append(Node.name).append(" -> ").append(Edge.childNode.name)
-                        .append(" [label=\"").append(Edge.weight).append("\"]")
-                        .append(edgeColor).append(";\n");
+        for (node Node : fileNodes.returnAllNode()){
+            if(path.contains(Node)){
+                dot.append("\t").append(Node.name).append(" [color=red, fontcolor=red];\n");
             }
-        }
+            else{
+                dot.append("\t").append(Node.name).append(";\n");
+            }
+            edge find_edge  = find_edge_in_list(edgePath, Node);
+            if(find_edge!=null){
+                for (edge Edge : Node.childlist){
+                    if(Edge.childNode == find_edge.childNode){
+                        dot.append("\t").append(Node.name).append(" -> ").append(Edge.childNode.name)
+                                .append(" [label=\"").append(Edge.weight).append("\", color=red, fontcolor=red];\n");
+                    }
+                    else{
+                        dot.append("\t").append(Node.name).append(" -> ").append(Edge.childNode.name)
+                                .append(" [label=\"").append(Edge.weight).append("\"];\n");
+                    }
 
-        for (edge Edge : edgePath) {
-            dot.append("\t").append(Edge.fatherNode.name).append(" [color=red, fontcolor=red];\n");
-            dot.append("\t").append(Edge.childNode.name).append(" [color=red, fontcolor=red];\n");
-            dot.append("\t").append(Edge.fatherNode.name).append(" -> ").append(Edge.childNode.name)
-                    .append(" [label=\"").append(Edge.weight).append("\", color=red, fontcolor=red];\n");
+                }
+            }
+            else{
+                for (edge Edge : Node.childlist){
+                    dot.append("\t").append(Node.name).append(" -> ").append(Edge.childNode.name)
+                            .append(" [label=\"").append(Edge.weight).append("\"];\n");
+                }
+            }
         }
 
         dot.append("}\n");
         return dot.toString();
+    }
+
+    public edge find_edge_in_list(List<edge> edgeList, node Node){
+        for (edge Edge : edgeList){
+            if (Edge.fatherNode == Node){
+                return Edge;
+            }
+        }
+        return null;
     }
 
     public void drawDirectedGraph(nodeList fileNodes, String fileName) throws IOException {
@@ -67,9 +84,9 @@ public class graphDrawer {
         displayImage(outputFile);
 
     }
-    public void drawHighlightGraph(nodeList fileNodes,List<edge> highlightPath, String fileName) throws IOException {
+    public void drawHighlightGraph(nodeList fileNodes,List<node> path,List<edge> highlightPath, String fileName) throws IOException {
 
-        String dotSource = generateHighLightGraph(fileNodes,highlightPath);
+        String dotSource = generateHighLightGraph(fileNodes,path,highlightPath);
 
         Graphviz graphviz = Graphviz.fromString(dotSource);
         File outputFile = new File(fileName);

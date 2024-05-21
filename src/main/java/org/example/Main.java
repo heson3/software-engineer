@@ -136,7 +136,7 @@ public class Main {
             graphDrawer lightedGraph = new graphDrawer();
             if (word_5.length == 2){
                 pathCalc.PathResult pathResult = pathcalc.calcShortestPath(word_5[0], word_5[1],nodelist);
-                lightedGraph.drawHighlightGraph(nodelist, pathResult.pathEdge,"h_graph.png");
+                lightedGraph.drawHighlightGraph(nodelist, pathResult.path,pathResult.pathEdge,"h_graph.png");
                 System.out.println("The shortest distance between " + word_5[0] + " and " + word_5[1] + " is "+ pathResult.length);
 
             } else if (word_5.length == 1) {
