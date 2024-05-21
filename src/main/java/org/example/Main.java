@@ -133,7 +133,7 @@ public class Main {
         if(comd ==6){
             randomWalk(nodelist);
         }
-        return "not 3 4";
+        return "whatever it is.\n";
     }
 
     public static void randomWalk(nodeList fileNodes) {
@@ -151,11 +151,10 @@ public class Main {
         Set<edge> visitedEdges = new HashSet<>();
         //随机游走结果
         List<String> walkResult = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Starting random walk from node: " + currentNode.name);
+        
         walkResult.add(currentNode.name);
-
         while (true) {
             if (currentNode.childlist.isEmpty()) {
                 System.out.println("No more outgoing edges from node: " + currentNode.name);
@@ -175,17 +174,9 @@ public class Main {
             walkResult.add(currentNode.name);
 
             System.out.println("Moved to node: " + currentNode.name);
-            //System.out.println("Press 'q' to stop or any other key to continue...");
-            /*
-            String input = scanner.nextLine();
-            if ("q".equalsIgnoreCase(input)) {
-                System.out.println("Random walk stopped by user.");
-                break;
-            }
-            */
         }
 
-        // 输出遍历结果并写入文件
+        // 遍历结果写入文件
         saveWalkResult(walkResult);
     }
 
