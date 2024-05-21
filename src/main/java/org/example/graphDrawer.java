@@ -33,14 +33,14 @@ public class graphDrawer {
         dot.append("digraph G {\n");
 
         for (node Node : fileNodes.returnAllNode()) {
-            if (highlightPath.contains(Node.name)) {
+            if (highlightPath.contains(Node)) {
                 dot.append("\t").append(Node.name).append(" [color=red, fontcolor=red];\n");
             } else {
                 dot.append("\t").append(Node.name).append(";\n");
             }
 
             for (edge Edge : Node.childlist) {
-                if (highlightPath.contains(Node.name) && highlightPath.contains(Edge.childNode.name)) {
+                if (highlightPath.contains(Node) && highlightPath.contains(Edge.childNode)) {
                     dot.append("\t").append(Node.name).append(" -> ").append(Edge.childNode.name)
                             .append(" [label=\"").append(Edge.weight).append("\", color=red, fontcolor=red];\n");
                 } else {
@@ -78,7 +78,7 @@ public class graphDrawer {
         lbl.setIcon(icon);
         frame.add(lbl);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }
 
