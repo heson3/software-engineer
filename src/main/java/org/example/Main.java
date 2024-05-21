@@ -33,7 +33,7 @@ public class Main {
             //画有向图
             tree = FileModule.fileNodes;
 
-            System.out.println("Input output file name(format: .png):");
+            System.out.println("Input directed graph file name(format: .png):");
             String outputFile = scanner.nextLine();
             outputFile = workDir + outputFile;
             //String filename = "F:\\Campus\\engineer\\softwareEngineering\\lab1\\mySW\\src\\main\\java\\org\\example\\graph.png";
@@ -42,6 +42,10 @@ public class Main {
             throw new RuntimeException(e);
         }
         System.out.println("initialize already done...you can enter command now.");
+        System.out.println("3.查询桥接词");
+        System.out.println("4.根据输入文本查询桥接词生成新文本");
+        System.out.println("5.计算最短路径");
+        System.out.println("6.随机游走");
         System.out.println("Enter 'exit' to end.");
 
         while (true) {
