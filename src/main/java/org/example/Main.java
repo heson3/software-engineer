@@ -30,11 +30,11 @@ public class Main {
             //画有向图
             tree = FileModule.fileNodes;
 
-            System.out.println("Input directed graph file name(format: .png):");
-            String outputFile = scanner.nextLine();
-            outputFile = workDir + outputFile;
+            //System.out.println("Input directed graph file name(format: .png):");
+            //String outputFile = scanner.nextLine();
+            //outputFile = workDir + outputFile;
             //String filename = "F:\\Campus\\engineer\\softwareEngineering\\lab1\\mySW\\src\\main\\java\\org\\example\\graph.png";
-            Drawer.drawDirectedGraph(tree,outputFile);
+            Drawer.drawDirectedGraph(tree,"origin.png");
         }catch (Exception e){
             throw new RuntimeException(e);
         }
@@ -98,32 +98,6 @@ public class Main {
             return query.output;
         }
         if(comd==4){
-            /*
-            //queryBridgeWords query = new queryBridgeWords(nodelist);
-            ArrayList<String> wordlist = new ArrayList<>(Arrays.asList(word));
-
-            int cnt=0;
-            for(int i = 0; i < word.length-1; i++){
-            //result += query.queryBW(word[i],word[i+1]);
-                query.queryBW(word[i],word[i+1]);
-                if(query.reslt==2){
-                    Random random = new Random();
-                    int r = query.findEdge.size();
-                    wordlist.add(i+1+cnt,query.findEdge.get(random.nextInt(r)).childNode.name);
-                    cnt++;
-                }
-            }
-            StringBuilder strbd = new StringBuilder();
-            for (int i = 0; i < wordlist.size(); i++) {
-                String s = wordlist.get(i);
-                if (i == wordlist.size() - 1) {
-                    strbd.append(s).append(".\n");
-                    break;
-                }
-                // 如果不是最后一个元素，添加空格
-                strbd.append(s).append(" ");
-            }
-            return strbd.toString();*/
             generateNewText func = new generateNewText();
             String  output = func.generateNewText(words, nodelist);
             System.out.println(output);
@@ -157,6 +131,13 @@ public class Main {
             }else {
                 System.out.println("Enter one word or two");
             }
+
+        }
+        if(comd == 6){
+            randomWalk random = new randomWalk();
+            String result = random.randomWalk(nodelist);
+            System.out.println(result);
+
 
         }
         return  "";
