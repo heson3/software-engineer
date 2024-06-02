@@ -110,6 +110,10 @@ public class Main {
             graphDrawer lightedGraph = new graphDrawer();
             if (word_5.length == 2){
                 pathCalc.PathResult pathResult = pathcalc.calcShortestPath(word_5[0], word_5[1],nodelist);
+                if(pathResult== null){
+                    System.out.println("no such path.");
+                    return "";
+                }
                 lightedGraph.drawHighlightGraph(nodelist, pathResult.path,pathResult.pathEdge,"h_graph.png");
                 System.out.println("The shortest distance between " + word_5[0] + " and " + word_5[1] + " is "+ pathResult.length);
 
